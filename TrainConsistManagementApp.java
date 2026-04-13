@@ -1,9 +1,9 @@
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Train Consist Management App
- * UC9: Group Bogies by Type using groupingBy()
+ * UC10: Count Total Seats using Stream reduce()
  */
 
 public class TrainConsistManagementApp {
@@ -30,34 +30,30 @@ public class TrainConsistManagementApp {
         System.out.println("      Train Consist Management App");
         System.out.println("=========================================\n");
 
-        System.out.println("========== UC9 - Group Bogies by Type ==========\n");
+        System.out.println("========== UC10 - Total Seating Capacity ==========\n");
 
-        // Create list (reuse UC7/UC8 concept)
+        // Create bogie list
         List<Bogie> bogies = new ArrayList<>();
 
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("Luxury", 80));
 
         // Display original list
-        System.out.println("Original Bogies:");
+        System.out.println("Bogies:");
         System.out.println(bogies);
 
-        // ----- GROUPING -----
-        Map<String, List<Bogie>> groupedBogies =
-                bogies.stream()
-                      .collect(Collectors.groupingBy(b -> b.name));
+        // ----- AGGREGATION -----
+        int totalCapacity = bogies.stream()
+                .map(b -> b.capacity)          // extract capacity
+                .reduce(0, Integer::sum);      // sum all values
 
-        // Display grouped result
-        System.out.println("\nGrouped Bogies:");
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
+        // Display total
+        System.out.println("\nTotal Seating Capacity: " + totalCapacity);
 
         // Verify original list unchanged
-        System.out.println("\nOriginal List After Grouping:");
+        System.out.println("\nOriginal List After Calculation:");
         System.out.println(bogies);
     }
 }
