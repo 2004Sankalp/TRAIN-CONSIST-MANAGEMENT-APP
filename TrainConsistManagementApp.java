@@ -1,6 +1,8 @@
+import java.util.Arrays;
+
 /**
  * Train Consist Management App
- * UC16: Sort Passenger Bogies using Bubble Sort
+ * UC17: Sort Bogie Names using Arrays.sort()
  */
 
 public class TrainConsistManagementApp {
@@ -11,43 +13,22 @@ public class TrainConsistManagementApp {
         System.out.println("      Train Consist Management App");
         System.out.println("=========================================\n");
 
-        System.out.println("========== UC16 - Bubble Sort ==========\n");
+        System.out.println("========== UC17 - Arrays.sort() ==========\n");
 
-        // Array of passenger bogie capacities
-        int[] capacities = {72, 56, 24, 70, 60};
+        // Array of bogie names
+        String[] bogieNames = {
+            "Sleeper", "AC Chair", "First Class", "General", "Luxury"
+        };
 
         // Display original array
-        System.out.print("Original Capacities: ");
-        printArray(capacities);
+        System.out.println("Original Bogie Names:");
+        System.out.println(Arrays.toString(bogieNames));
 
-        // ----- BUBBLE SORT -----
-        int n = capacities.length;
-
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-
-                // Compare adjacent elements
-                if (capacities[j] > capacities[j + 1]) {
-
-                    // Swap
-                    int temp = capacities[j];
-                    capacities[j] = capacities[j + 1];
-                    capacities[j + 1] = temp;
-                }
-            }
-        }
+        // ----- SORT USING BUILT-IN METHOD -----
+        Arrays.sort(bogieNames);
 
         // Display sorted array
-        System.out.print("\nSorted Capacities: ");
-        printArray(capacities);
-    }
-
-    // Helper method to print array
-    public static void printArray(int[] arr) {
-        System.out.print("[ ");
-        for (int val : arr) {
-            System.out.print(val + " ");
-        }
-        System.out.println("]");
+        System.out.println("\nSorted Bogie Names (Alphabetical):");
+        System.out.println(Arrays.toString(bogieNames));
     }
 }
