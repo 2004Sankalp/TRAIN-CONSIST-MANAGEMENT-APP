@@ -1,9 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Train Consist Management App
- * UC2: Add Passenger Bogies to Train
+ * UC3: Track Unique Bogie IDs using HashSet
  */
 
 public class TrainConsistManagementApp {
@@ -14,34 +14,23 @@ public class TrainConsistManagementApp {
         System.out.println("      Train Consist Management App");
         System.out.println("=========================================\n");
 
-        System.out.println("========== UC2 - Add Passenger Bogies to Train ==========\n");
+        System.out.println("========== UC3 - Track Unique Bogie IDs ==========\n");
 
-        // Create ArrayList to hold passenger bogies
-        List<String> trainConsist = new ArrayList<>();
+        // Create a Set to store unique bogie IDs
+        Set<String> bogies = new HashSet<>();
 
-        // ----- CREATE (Add bogies) -----
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC Chair");
-        trainConsist.add("First Class");
+        // ----- ADD IDs (including duplicates) -----
+        bogies.add("BG101");
+        bogies.add("BG102");
+        bogies.add("BG103");
+        bogies.add("BG104");
 
-        System.out.println("Bogies after addition:");
-        System.out.println(trainConsist);
+        // Duplicate entries
+        bogies.add("BG101"); // duplicate
+        bogies.add("BG102"); // duplicate
 
-        // ----- DELETE (Remove a bogie) -----
-        trainConsist.remove("AC Chair");
-
-        System.out.println("\nAfter removing 'AC Chair':");
-        System.out.println(trainConsist);
-
-        // ----- CHECK existence -----
-        if (trainConsist.contains("Sleeper")) {
-            System.out.println("\n'Sleeper' bogie exists in the train.");
-        } else {
-            System.out.println("\n'Sleeper' bogie does NOT exist.");
-        }
-
-        // Final state
-        System.out.println("\nFinal Train Consist:");
-        System.out.println(trainConsist);
+        // Display final set
+        System.out.println("Unique Bogie IDs in Train:");
+        System.out.println(bogies);
     }
 }
