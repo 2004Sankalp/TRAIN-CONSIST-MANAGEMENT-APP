@@ -1,8 +1,9 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * Train Consist Management App
- * UC18: Linear Search for Bogie ID
+ * UC19: Binary Search for Bogie ID
  */
 
 public class TrainConsistManagementApp {
@@ -13,28 +14,44 @@ public class TrainConsistManagementApp {
         System.out.println("      Train Consist Management App");
         System.out.println("=========================================\n");
 
-        System.out.println("========== UC18 - Linear Search ==========\n");
+        System.out.println("========== UC19 - Binary Search ==========\n");
 
-        // Array of bogie IDs (unsorted)
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        // Unsorted array (handled inside)
+        String[] bogieIds = {"BG309", "BG101", "BG550", "BG205", "BG412"};
 
-        // Take input
+        // ----- SORT FIRST (IMPORTANT) -----
+        Arrays.sort(bogieIds);
+
+        System.out.println("Sorted Bogie IDs:");
+        System.out.println(Arrays.toString(bogieIds));
+
+        // Input
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter Bogie ID to search: ");
-        String searchKey = scanner.nextLine();
+        System.out.print("\nEnter Bogie ID to search: ");
+        String key = scanner.nextLine();
 
-        // ----- LINEAR SEARCH -----
+        // ----- BINARY SEARCH -----
+        int low = 0;
+        int high = bogieIds.length - 1;
         boolean found = false;
 
-        for (int i = 0; i < bogieIds.length; i++) {
+        while (low <= high) {
 
-            if (bogieIds[i].equals(searchKey)) {
+            int mid = (low + high) / 2;
+
+            int comparison = bogieIds[mid].compareTo(key);
+
+            if (comparison == 0) {
                 found = true;
-                break; // stop early when found
+                break;
+            } else if (comparison < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
 
-        // ----- RESULT -----
+        // Result
         if (found) {
             System.out.println("Bogie ID FOUND ✅");
         } else {
