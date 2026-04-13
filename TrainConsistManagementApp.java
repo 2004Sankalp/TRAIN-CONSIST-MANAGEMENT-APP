@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Train Consist Management App
- * UC8: Filter Passenger Bogies using Streams
+ * UC9: Group Bogies by Type using groupingBy()
  */
 
 public class TrainConsistManagementApp {
@@ -31,30 +30,34 @@ public class TrainConsistManagementApp {
         System.out.println("      Train Consist Management App");
         System.out.println("=========================================\n");
 
-        System.out.println("========== UC8 - Filter Bogies Using Streams ==========\n");
+        System.out.println("========== UC9 - Group Bogies by Type ==========\n");
 
-        // Original list (same as UC7)
+        // Create list (reuse UC7/UC8 concept)
         List<Bogie> bogies = new ArrayList<>();
+
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("Luxury", 80));
+        bogies.add(new Bogie("AC Chair", 56));
 
         // Display original list
         System.out.println("Original Bogies:");
         System.out.println(bogies);
 
-        // ----- FILTER using Stream -----
-        List<Bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+        // ----- GROUPING -----
+        Map<String, List<Bogie>> groupedBogies =
+                bogies.stream()
+                      .collect(Collectors.groupingBy(b -> b.name));
 
-        // Display filtered list
-        System.out.println("\nFiltered Bogies (capacity > 60):");
-        System.out.println(filteredBogies);
+        // Display grouped result
+        System.out.println("\nGrouped Bogies:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
 
         // Verify original list unchanged
-        System.out.println("\nOriginal List After Filtering:");
+        System.out.println("\nOriginal List After Grouping:");
         System.out.println(bogies);
     }
 }
